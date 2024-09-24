@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { FilmService } from '../services/film/film.service';
 
 @Component({
   selector: 'app-film',
@@ -7,22 +8,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FilmComponent implements OnInit {
 
-  filmName = "Jurassic Park";
-  filmOnAir = "En Blue Ray";
-  filmAffiche = 'https://upload.wikimedia.org/wikipedia/fr/6/6a/Jurassic_Park_logo.svg';
+  @Input() filmName = "";
+  @Input() filmOnAir = false;
+  @Input() filmAffiche = '';
+  @Input() index = 0;
 
-  constructor() { }
+  constructor(private Film:FilmService) {}
 
   ngOnInit(): void {
   }
 
 
-  getOnAir():string{
+  getOnAir():boolean{
     return this.filmOnAir;
   }
 
   onWatchFilm():void{
     console.log('Lecture de film démarré');
+  }
+
+  changeColor(){
+    return this.filmOnAir ? 'purple' : 'red';
+  }
+
+  onSwitch(){
+    this.Film.switchOnAir(this.index);
   }
 
 }

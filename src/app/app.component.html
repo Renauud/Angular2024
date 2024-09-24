@@ -1,14 +1,10 @@
-<li class="list-group">
-  <h3>Nouveau Film</h3>
-</li>
-
 <div>
   <h1>
     Welcome to {{ title }} !
   </h1>
 </div>
 <ul>
-  <app-film></app-film>
-  <app-film></app-film>
-  <app-film></app-film>
+  <button class="btn btn-outline-success" (click)="onAirAll()">En Salle</button>
+  <button class="btn btn-outline-success" (click)="noOnAirAll()">Pas En Salle</button>
+  <app-film *ngFor="let film of films; let i = index"  [filmName]="film.title" [filmOnAir]="film.onAir" [filmAffiche]="film.filmAffiche" [index]="i"></app-film>
 </ul>

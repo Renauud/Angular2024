@@ -1,5 +1,15 @@
-<li class="list-group-item">
-    <h3>Film : {{ filmName }} -- Visibilité : {{getOnAir()}} </h3>
+<li class="list-group-item" [ngClass]="{'list-group-item-info': filmOnAir == true,
+                                        'list-group-item-warning' : filmOnAir == false}">
+    <div class="onAir" *ngIf="filmOnAir == true">
+        <img src="https://image.son-video.com/images/illustration/guides/blu-ray-ultra-hd-4k-le-disque-ultra-haute-definition/SVDGUI-201009-DVDHauteDe-finition-980x260.jpg" alt="Film Blue Ray">
+    </div>
+
+    <div class="onAir" *ngIf="filmOnAir == false">
+        <img src="https://img.lemde.fr/2021/10/01/0/0/3250/2167/664/0/75/0/618639f_830346712-rea-294658-008.jpg" alt="Film En Salle">
+    </div>
+
+    <h3 [ngStyle]="{color : changeColor()}">{{ filmName }}</h3>
     <img class="affiche" [src]="filmAffiche">
-    <button class="btn btn-outline-success  " (click)="onWatchFilm()"></button>
+    <button class="btn btn-outline-success" (click)="onWatchFilm()">Regarder</button>
+    <button class="btn btn-outline-success" (click)="onSwitch()">Switch</button>
 </li>
