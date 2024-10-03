@@ -9,6 +9,7 @@ import { FilmModifComponent } from './film-modif/film-modif.component';
 import { FilmNewComponent } from './film-new/film-new.component';
 import { HomeComponent } from './home/home.component';
 import { FilmListComponent } from './film-list/film-list.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { FilmListComponent } from './film-list/film-list.component';
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [FilmService],
   bootstrap: [AppComponent]
