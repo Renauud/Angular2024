@@ -1,13 +1,16 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FilmService {
 
+  filmSubject = new Subject<any[]>();
+
   constructor() { }
 
-  films = [
+  private films = [
     {
       id:1,
       title : 'Jurassic Park',
@@ -32,6 +35,7 @@ export class FilmService {
     for(const film of this.films){
       film.onAir = true;
     }
+    this.emitFilmSubject();
   }
 
   setNoOnAir(){
@@ -39,10 +43,12 @@ export class FilmService {
       film.onAir = false;
       console.log(film);
     }
+    this.emitFilmSubject();
   }
 
   switchOnAir(index: number){
     this.films[index].onAir = !this.films[index].onAir;
+    this.emitFilmSubject();
   }
 
   getFilmById(id: number){
@@ -53,5 +59,9 @@ export class FilmService {
       }
     }
     return tmp;
+  }
+
+  emitFilmSubject(){
+    this.filmSubject.next(this.films.slice());
   }
 }

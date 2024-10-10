@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FilmService } from '../services/film/film.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-film-list',
@@ -9,11 +10,19 @@ import { FilmService } from '../services/film/film.service';
 export class FilmListComponent implements OnInit {
   title = 'first-project Films';
   films:any = [];
+  filmSubscription : Subscription | undefined;
   
   constructor(private Film:FilmService){}
 
   ngOnInit(): void {
-    this.films = this.Film.films;
+    this.filmSubscription = this.Film.filmSubject.subscribe((listFilm)=>{
+      this.films = listFilm;
+    });
+    this.Film.emitFilmSubject();
+  }
+
+  ngOnDestroy(){
+    this.filmSubscription?.unsubscribe();
   }
 
   onAirAll(){
