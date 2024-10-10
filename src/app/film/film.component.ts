@@ -10,8 +10,9 @@ export class FilmComponent implements OnInit {
 
   @Input() filmName = "";
   @Input() filmOnAir = false;
-  @Input() filmAffiche = '';
+  @Input() filmAffiche = "";
   @Input() index = 0;
+  @Input() id = 0;
 
   constructor(private Film:FilmService) {}
 

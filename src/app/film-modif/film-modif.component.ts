@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FilmService } from '../services/film/film.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-film-modif',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FilmModifComponent implements OnInit {
 
-  constructor() { }
+  film:any;
+
+  constructor(private Film: FilmService, private route:ActivatedRoute) { }
 
   ngOnInit(): void {
+    const id = this.route.snapshot.params['id'];
+    this.film = this.Film.getFilmById(id);
   }
-
 }
